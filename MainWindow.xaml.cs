@@ -17,6 +17,8 @@ using Microsoft.Win32;
 
 
 
+
+
 namespace calculadora_de_semanas;
 
 /// <summary>
@@ -24,13 +26,13 @@ namespace calculadora_de_semanas;
 /// </summary>
 public partial class MainWindow : Window
 {
-    public ObservableCollection<Job> rnd = new ObservableCollection<Job>();
     public Person person;
+
     public MainWindow()
     {
         InitializeComponent();
-
     }
+
     private void OpenPdf_Click(object sender, RoutedEventArgs e)
     {
         OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -42,26 +44,26 @@ public partial class MainWindow : Window
             loadFile(openFileDialog.FileName);
         }
     }
+
     private void loadFile(string filename)
     {
-        jobsToShow.Items.Clear();
         string fileContent = PdfParser.getFileContent(filename);
-
         int semanas = PdfParser.getWeeks(fileContent);
         ArrayList rawJobs = PdfParser.getJobs(fileContent);
 
-        person = new Person(semanas, rawJobs);
-        //todo mostrar los datos
+        this.person = new Person(semanas, rawJobs);
+        
+        jobsToShow.Items.Clear();
         foreach (Job job in person.getJobs())
         {
             jobsToShow.Items.Add(job);
         }
         semanasTotales.Text = "Promedio de salario en las ultimas 250 semanas: " + person.getSalarioPromedio().ToString();
-
     }
+
     private void OpenHistory(object sender, RoutedEventArgs e)
     {
-        if (person == null)
+        if (this.person == null)
         {
             MessageBox.Show("Porfavor cargue el archivo de las semanas antes de continuar");
         }

@@ -11,6 +11,7 @@
             <ColumnDefinition />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
+        
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
@@ -34,7 +35,6 @@
                 VerticalScrollBarVisibility="Auto"
                 HorizontalScrollBarVisibility="Auto"
                 Grid.Column="1" Grid.Row="1">
-
                 <ItemsControl x:Name="jobsToShow">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>

@@ -3,6 +3,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ExtendedNumerics;
 
 namespace calculadora_de_semanas
 {
@@ -13,7 +14,7 @@ namespace calculadora_de_semanas
         public DateTime alta{get;set;}
         public DateTime baja{get;set;}
         public string patron{get;set;}
-        public decimal salario{get;set;}
+        public BigDecimal salario{get;set;}
         public int place{get;set;}
         #region "GEt&Set"
         public DateTime getAlta()
@@ -46,12 +47,12 @@ namespace calculadora_de_semanas
             this.patron = patron;
         }
 
-        public decimal getSalario()
+        public BigDecimal getSalario()
         {
             return this.salario;
         }
 
-        public void setSalario(decimal salario)
+        public void setSalario(BigDecimal salario)
         {
             this.salario = salario;
         }
@@ -67,7 +68,7 @@ namespace calculadora_de_semanas
         }
 
         #endregion
-        public AverageEntry(DateTime alta, DateTime baja, string patron, decimal salario, int place)
+        public AverageEntry(DateTime alta, DateTime baja, string patron, BigDecimal salario, int place)
         {
             this.alta = alta;
             this.baja = baja;

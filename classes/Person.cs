@@ -2,17 +2,20 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using ExtendedNumerics;
 
 namespace calculadora_de_semanas
 {
     public class Person
     {
-        public decimal salarioPromedio { get; set; }
+        public BigDecimal salarioPromedio { get; set; }
         public int semanasTotales { get; set; }
         public ArrayList jobs { get; set; }
         public ArrayList rawJobs { get; set; }
         public int LastJobs { get; set; }
+        public string salarioPromedioDisplay;
         private const int LAST_WEEKS = 250;
         public Person(int semanasTotales, ArrayList rawJobs)
         {
@@ -24,12 +27,21 @@ namespace calculadora_de_semanas
             calcularSalarioPromedio();
         }
         #region "Getter&Setter"
-        public decimal getSalarioPromedio()
+        public string getSalarioPromedioDisplay()
+        {
+            return this.salarioPromedioDisplay;
+        }
+
+        public void setSalarioPromedioDisplay(string salarioPromedioDisplay)
+        {
+            this.salarioPromedioDisplay = salarioPromedioDisplay;
+        }
+        public BigDecimal getSalarioPromedio()
         {
             return this.salarioPromedio;
         }
 
-        public void setSalarioPromedio(decimal salarioPromedio)
+        public void setSalarioPromedio(BigDecimal salarioPromedio)
         {
             this.salarioPromedio = salarioPromedio;
         }
@@ -80,8 +92,7 @@ namespace calculadora_de_semanas
         {
             foreach (string job in rawJobs)
             {
-
-                //TODO: separar los datos e isntanciar lso objetos, also dont forget to parse string into dateTime
+                //TODO usar reguex en lugar de numeros magicos
                 string[] split = job.Split('\n');
                 //ejemplo de array spliteado:
                 //0 4/05/1993
@@ -91,15 +102,15 @@ namespace calculadora_de_semanas
                 //4 $ 39.99
                 //5 Nombre del patrón NOMBRE DEL PATRON.
                 //6 Registro Patronal fdfbfwe7184 (18)
-                jobs.Add(new Job(split[5].Substring(18), split[6].Substring(18), split[1], decimal.Parse(split[4].Substring(1)), split[2].Substring(57), split[0]));
+                jobs.Add(new Job(split[5].Substring(18), split[6].Substring(18), split[1], BigDecimal.Parse(split[4].Substring(1)), split[2].Substring(57), split[0]));
 
             }
         }
-        
+
         private void calcularSalarioPromedio()
         {
-            decimal cumulativeWeeks = 0;
-            decimal cumulativeSalary = 0;
+            BigDecimal cumulativeWeeks = 0;
+            BigDecimal cumulativeSalary = 0;
 
             foreach (Job job in this.jobs)
             {
@@ -107,7 +118,7 @@ namespace calculadora_de_semanas
                 LastJobs++;
                 if (cumulativeWeeks >= Person.LAST_WEEKS)
                 {
-                    decimal semanasGap = cumulativeWeeks - Person.LAST_WEEKS;
+                    BigDecimal semanasGap = cumulativeWeeks - Person.LAST_WEEKS;
                     cumulativeSalary += (job.getSemanas() - semanasGap) * job.getSalario();
                     break;
                 }
@@ -117,6 +128,7 @@ namespace calculadora_de_semanas
                 }
             }
             salarioPromedio = cumulativeSalary / Person.LAST_WEEKS;
+            this.salarioPromedioDisplay = Regex.Match(salarioPromedio.ToString(), @"\d*\.?\d{0,2}").ToString();
         }
     }
 }

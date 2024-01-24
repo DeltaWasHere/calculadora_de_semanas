@@ -58,7 +58,7 @@ public partial class MainWindow : Window
         {
             jobsToShow.Items.Add(job);
         }
-        semanasTotales.Text = "Promedio de salario en las ultimas 250 semanas: " + person.getSalarioPromedio().ToString();
+        semanasTotales.Text = "Promedio de salario en las ultimas 250 semanas: " + person.getSalarioPromedioDisplay();
     }
 
     private void OpenHistory(object sender, RoutedEventArgs e)

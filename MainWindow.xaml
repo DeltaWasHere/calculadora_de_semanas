@@ -51,7 +51,7 @@
                                     Text="{Binding alta, StringFormat= Fecha de alta: {0}}"></TextBlock>
                                 <TextBlock
                                     Text="{Binding baja, StringFormat= Fecha de baja: {0}}"></TextBlock>
-                                <TextBlock Text="{Binding semanas, StringFormat= Semanas: {0}}"></TextBlock>
+                                <TextBlock Text="{Binding semanasDisplay, StringFormat= Semanas: {0}}"></TextBlock>
                             </WrapPanel>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>

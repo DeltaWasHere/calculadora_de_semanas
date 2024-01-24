@@ -4,23 +4,25 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using ExtendedNumerics;
 
 namespace calculadora_de_semanas
 {
     public class Job
     {
-        public string patron {get; set;}
-        public string registroPatronal {get; set;}
-        public string entidadFederativa {get; set;}
-        public decimal salario {get; set;}
-        public decimal semanas {get; set;}
-        public DateTime alta {get; set;}
-        public DateTime baja {get; set;}
+        public string patron { get; set; }
+        public string registroPatronal { get; set; }
+        public string entidadFederativa { get; set; }
+        public BigDecimal salario { get; set; }
+        public BigDecimal semanas { get; set; }
+        public DateTime alta { get; set; }
+        public DateTime baja { get; set; }
+        public string semanasDisplay { get; set;}
 
-       
 
-        public Job(string patron, string registroPatronal, string entidadFederativa, decimal salario, string alta, string baja)
+        public Job(string patron, string registroPatronal, string entidadFederativa, BigDecimal salario, string alta, string baja)
         {
             this.patron = patron;
             this.registroPatronal = registroPatronal;
@@ -31,7 +33,17 @@ namespace calculadora_de_semanas
             calcularSemanas();
         }
         #region  "Getter&Setter"
-         public string getPatron()
+        public string getSemanasDisplay()
+        {
+            return this.semanasDisplay;
+        }
+
+         public void setSemanasDisplay(string semanasDisplay)
+        {
+            this.semanasDisplay = semanasDisplay;
+        }
+        
+        public string getPatron()
         {
             return this.patron;
         }
@@ -61,17 +73,17 @@ namespace calculadora_de_semanas
             this.entidadFederativa = entidadFederativa;
         }
 
-        public decimal getSalario()
+        public BigDecimal getSalario()
         {
             return this.salario;
         }
 
-        public void setSalario(decimal salario)
+        public void setSalario(BigDecimal salario)
         {
             this.salario = salario;
         }
 
-        public decimal getSemanas()
+        public BigDecimal getSemanas()
         {
             return this.semanas;
         }
@@ -100,12 +112,12 @@ namespace calculadora_de_semanas
         {
             this.baja = baja;
         }
-
         #endregion
-        
-        public void calcularSemanas(){
-            this.semanas = (decimal)(baja-alta).TotalDays/7;
-        }
 
+        public void calcularSemanas()
+        {
+            this.semanas = (BigDecimal)(baja - alta).TotalDays / 7;
+            this.semanasDisplay = Regex.Match(semanas.ToString(), @"\d*\.?\d{0,2}").ToString();
+        }
     }
 }

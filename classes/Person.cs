@@ -8,22 +8,22 @@ namespace calculadora_de_semanas
 {
     public class Person
     {
-        public decimal salarioPromedio{get;set;}
-        public int semanasTotales{get;set;}
-        public ArrayList jobs{get;set;}
-        public ArrayList rawJobs{get;set;}
-        public int LastJobs{get;set;}
-
+        public decimal salarioPromedio { get; set; }
+        public int semanasTotales { get; set; }
+        public ArrayList jobs { get; set; }
+        public ArrayList rawJobs { get; set; }
+        public int LastJobs { get; set; }
+        private const int LAST_WEEKS = 250;
         public Person(int semanasTotales, ArrayList rawJobs)
         {
             jobs = new ArrayList();
-            LastJobs=0;
+            LastJobs = 0;
             this.semanasTotales = semanasTotales;
             this.rawJobs = rawJobs;
             parseJobs();
             calcularSalarioPromedio();
         }
-     #region "Getter&Setter"
+        #region "Getter&Setter"
         public decimal getSalarioPromedio()
         {
             return this.salarioPromedio;
@@ -74,12 +74,9 @@ namespace calculadora_de_semanas
             this.LastJobs = LastJobs;
         }
 
-#endregion
+        #endregion
 
-
-     
-
-        public void parseJobs()
+        private void parseJobs()
         {
             foreach (string job in rawJobs)
             {
@@ -98,47 +95,19 @@ namespace calculadora_de_semanas
 
             }
         }
-        public void showJobs()
-        {
-            foreach (Job job in jobs)
-            {
-                Console.WriteLine(job.getAlta());
-                Console.WriteLine(job.getBaja());
-                Console.WriteLine(job.getPatron());
-                Console.WriteLine(job.getRegistroPatronal());
-                Console.WriteLine(job.getEntidadFederativa());
-                Console.WriteLine(job.getSalario());
-                Console.WriteLine(job.getSemanas());
-            }
-        }
-        public void showWeeksPerJob()
-        {
-            decimal weeksSumary = 0M;
-            foreach (Job job in jobs)
-            {
-                weeksSumary = weeksSumary + job.getSemanas();
-                Console.WriteLine(job.getPatron());
-                Console.WriteLine(job.getSemanas());
-                Console.WriteLine(job.getAlta());
-                Console.WriteLine(job.getBaja());
-            }
-            Console.WriteLine("Total weeks:" + weeksSumary);
-        }
-
+        
         private void calcularSalarioPromedio()
         {
-            jobs.RemoveAt(0);
             decimal cumulativeWeeks = 0;
             decimal cumulativeSalary = 0;
-
 
             foreach (Job job in this.jobs)
             {
                 cumulativeWeeks += job.getSemanas();
                 LastJobs++;
-                if (cumulativeWeeks >= 250)
+                if (cumulativeWeeks >= Person.LAST_WEEKS)
                 {
-                    decimal semanasGap = cumulativeWeeks - 250;
+                    decimal semanasGap = cumulativeWeeks - Person.LAST_WEEKS;
                     cumulativeSalary += (job.getSemanas() - semanasGap) * job.getSalario();
                     break;
                 }
@@ -147,10 +116,7 @@ namespace calculadora_de_semanas
                     cumulativeSalary += job.getSemanas() * job.getSalario();
                 }
             }
-
-            salarioPromedio = cumulativeSalary / 250;
-            Console.WriteLine(salarioPromedio);
-
+            salarioPromedio = cumulativeSalary / Person.LAST_WEEKS;
         }
     }
 }

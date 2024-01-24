@@ -25,13 +25,13 @@ namespace calculadora_de_semanas
     /// </summary>
     public partial class AverageHistory : Window
     {
-        ObservableCollection <AverageEntry> entries = new ObservableCollection<AverageEntry>();
+        ObservableCollection<AverageEntry> entries = new ObservableCollection<AverageEntry>();
         public AverageHistory(Person person)
         {
             InitializeComponent();
             ArrayList jobs = person.getJobs();
             int lastJobs = person.getLastJobs();
-            
+
             decimal cumulativeWeeks = 0;
             //decimal cumulativeSalary = 0;
             int counter = 0;
@@ -59,11 +59,8 @@ namespace calculadora_de_semanas
                     //cumulativeSalary += job.getSemanas() * job.getSalario();
                 }
             }
-            entriesToShow.DataContext=entries;
+            entriesToShow.DataContext = entries;
             //averageEntries = entries;
-
-
-
         }
     }
 }

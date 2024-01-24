@@ -1,4 +1,8 @@
-﻿using System.Text;
+﻿using System.Collections;
+using System.Collections.ObjectModel;
+using System.Text;
+using System.Text.Json.Serialization;
+using System.Threading.Tasks.Dataflow;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -8,16 +12,62 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using calculadora_de_semanas;
+using Microsoft.Win32;
 
-namespace despacho;
+
+
+namespace calculadora_de_semanas;
 
 /// <summary>
 /// Interaction logic for MainWindow.xaml
 /// </summary>
 public partial class MainWindow : Window
 {
+    public ObservableCollection<Job> rnd = new ObservableCollection<Job>();
+    public Person person;
     public MainWindow()
     {
         InitializeComponent();
+
+    }
+    private void OpenPdf_Click(object sender, RoutedEventArgs e)
+    {
+        OpenFileDialog openFileDialog = new OpenFileDialog();
+        openFileDialog.DefaultExt = ".pdf";
+        openFileDialog.Filter = "Pdf files (*.pdf)|*.pdf";
+
+        if (openFileDialog.ShowDialog() == true)
+        {
+            loadFile(openFileDialog.FileName);
+        }
+    }
+    private void loadFile(string filename)
+    {
+        jobsToShow.Items.Clear();
+        string fileContent = PdfParser.getFileContent(filename);
+
+        int semanas = PdfParser.getWeeks(fileContent);
+        ArrayList rawJobs = PdfParser.getJobs(fileContent);
+
+        person = new Person(semanas, rawJobs);
+        //todo mostrar los datos
+        foreach (Job job in person.getJobs())
+        {
+            jobsToShow.Items.Add(job);
+        }
+        semanasTotales.Text = "Promedio de salario en las ultimas 250 semanas: " + person.getSalarioPromedio().ToString();
+
+    }
+    private void OpenHistory(object sender, RoutedEventArgs e)
+    {
+        if (person == null)
+        {
+            MessageBox.Show("Porfavor cargue el archivo de las semanas antes de continuar");
+        }
+        else
+        {
+            (new AverageHistory(person)).Show();
+        }
     }
 }

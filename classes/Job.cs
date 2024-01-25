@@ -116,8 +116,13 @@ namespace calculadora_de_semanas
 
         public void calcularSemanas()
         {
-            this.semanas = (BigDecimal)( (baja.Equals("Vigente") ? DateTime.Today : DateTime.Parse(baja))-DateTime.Parse(alta)).TotalDays / 7;
-            this.semanasDisplay = Regex.Match(semanas.ToString(), @"\d*\.?\d{0,2}").ToString();
+            this.semanas = (BigDecimal)((baja.Equals("Vigente") ? DateTime.Today : DateTime.Parse(baja)) - DateTime.Parse(alta)).TotalDays / 7;
+            if (Regex.Match(semanas.ToString(), @"\d+\.[5-9]").ToString().Length>0)
+            {
+                this.semanasDisplay=(this.semanas+1).WholeValue.ToString();
+            }else{
+                this.semanasDisplay = this.semanas.WholeValue.ToString();
+            }
         }
     }
 }

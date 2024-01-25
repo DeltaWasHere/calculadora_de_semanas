@@ -11,28 +11,28 @@ namespace calculadora_de_semanas
 
     public class AverageEntry
     {
-        public DateTime alta{get;set;}
-        public DateTime baja{get;set;}
+        public string alta{get;set;}
+        public string baja{get;set;}
         public string patron{get;set;}
         public BigDecimal salario{get;set;}
         public int place{get;set;}
         #region "GEt&Set"
-        public DateTime getAlta()
+        public string getAlta()
         {
             return this.alta;
         }
 
-        public void setAlta(DateTime alta)
+        public void setAlta(string alta)
         {
             this.alta = alta;
         }
 
-        public DateTime getBaja()
+        public string getBaja()
         {
             return this.baja;
         }
 
-        public void setBaja(DateTime baja)
+        public void setBaja(string baja)
         {
             this.baja = baja;
         }
@@ -68,7 +68,7 @@ namespace calculadora_de_semanas
         }
 
         #endregion
-        public AverageEntry(DateTime alta, DateTime baja, string patron, BigDecimal salario, int place)
+        public AverageEntry(string alta, string baja, string patron, BigDecimal salario, int place)
         {
             this.alta = alta;
             this.baja = baja;

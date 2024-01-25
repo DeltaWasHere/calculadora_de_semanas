@@ -17,9 +17,9 @@ namespace calculadora_de_semanas
         public string entidadFederativa { get; set; }
         public BigDecimal salario { get; set; }
         public BigDecimal semanas { get; set; }
-        public DateTime alta { get; set; }
-        public DateTime baja { get; set; }
-        public string semanasDisplay { get; set;}
+        public string alta { get; set; }
+        public string baja { get; set; }
+        public string semanasDisplay { get; set; }
 
 
         public Job(string patron, string registroPatronal, string entidadFederativa, BigDecimal salario, string alta, string baja)
@@ -28,8 +28,8 @@ namespace calculadora_de_semanas
             this.registroPatronal = registroPatronal;
             this.entidadFederativa = entidadFederativa;
             this.salario = salario;
-            this.alta = DateTime.Parse(alta);
-            this.baja = DateTime.Parse(baja);
+            this.alta = alta;
+            this.baja = baja;
             calcularSemanas();
         }
         #region  "Getter&Setter"
@@ -38,11 +38,11 @@ namespace calculadora_de_semanas
             return this.semanasDisplay;
         }
 
-         public void setSemanasDisplay(string semanasDisplay)
+        public void setSemanasDisplay(string semanasDisplay)
         {
             this.semanasDisplay = semanasDisplay;
         }
-        
+
         public string getPatron()
         {
             return this.patron;
@@ -93,22 +93,22 @@ namespace calculadora_de_semanas
             this.semanas = semanas;
         }
 
-        public DateTime getAlta()
+        public string getAlta()
         {
             return this.alta;
         }
 
-        public void setAlta(DateTime alta)
+        public void setAlta(string alta)
         {
             this.alta = alta;
         }
 
-        public DateTime getBaja()
+        public string getBaja()
         {
             return this.baja;
         }
 
-        public void setBaja(DateTime baja)
+        public void setBaja(string baja)
         {
             this.baja = baja;
         }
@@ -116,7 +116,7 @@ namespace calculadora_de_semanas
 
         public void calcularSemanas()
         {
-            this.semanas = (BigDecimal)(baja - alta).TotalDays / 7;
+            this.semanas = (BigDecimal)( (baja.Equals("Vigente") ? DateTime.Today : DateTime.Parse(baja))-DateTime.Parse(alta)).TotalDays / 7;
             this.semanasDisplay = Regex.Match(semanas.ToString(), @"\d*\.?\d{0,2}").ToString();
         }
     }

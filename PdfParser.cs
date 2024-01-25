@@ -12,8 +12,8 @@ namespace calculadora_de_semanas
 {
     public class PdfParser
     {
-       private const string WEEKS_FILTER = "Constancia de Semanas Cotizadas en el IMSS";
-       private static readonly string[] JOB_SEPARATORS = [ "/* Valor del último salario base de cotización diario en pesos.", "Tu historia laboral", "deInstituto Mexicano del Seguro Social" ];
+        private const string WEEKS_FILTER = "Constancia de Semanas Cotizadas en el IMSS";
+        private static readonly string[] JOB_SEPARATORS = ["/* Valor del último salario base de cotización diario en pesos.", "Tu historia laboral", "deInstituto Mexicano del Seguro Social"];
 
         public static string getFileContent(string file)
         {
@@ -51,8 +51,7 @@ namespace calculadora_de_semanas
             {
                 char[] toTrim = { '\n', ' ' };
                 jobs[i] = jobs[i].Trim(toTrim);
-
-                if (char.IsDigit(jobs[i][0]))
+                if (jobs[i].Contains("Vigente\n") || char.IsDigit(jobs[i][0]))
                 {
                     filteredJobs.Add(jobs[i]);
                 }

@@ -15,18 +15,54 @@ namespace calculadora_de_semanas
         public ArrayList jobs { get; set; }
         public ArrayList rawJobs { get; set; }
         public int LastJobs { get; set; }
-        public string salarioPromedioDisplay;
+        public string salarioPromedioDisplay { get; set; }
+        public string curp;
+        public string nss;
+        public string nombre;
         private const int LAST_WEEKS = 250;
-        public Person(int semanasTotales, ArrayList rawJobs)
+        public Person(int semanasTotales, ArrayList rawJobs, string nombre, string curp, string nss)
         {
             jobs = new ArrayList();
             LastJobs = 0;
             this.semanasTotales = semanasTotales;
             this.rawJobs = rawJobs;
+            this.nombre = nombre;
+            this.curp = curp;
+            this.nss = nss;
             parseJobs();
             calcularSalarioPromedio();
         }
         #region "Getter&Setter"
+        public string getCurp()
+        {
+            return this.curp;
+        }
+
+        public void setCurp(string curp)
+        {
+            this.curp = curp;
+        }
+
+        public string getNss()
+        {
+            return this.nss;
+        }
+
+        public void setNss(string nss)
+        {
+            this.nss = nss;
+        }
+
+        public string getNombre()
+        {
+            return this.nombre;
+        }
+
+        public void setNombre(string nombre)
+        {
+            this.nombre = nombre;
+        }
+
         public string getSalarioPromedioDisplay()
         {
             return this.salarioPromedioDisplay;

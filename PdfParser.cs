@@ -14,7 +14,7 @@ namespace calculadora_de_semanas
     {
         private const string WEEKS_FILTER = "Constancia de Semanas Cotizadas en el IMSS";
         private static readonly string[] JOB_SEPARATORS = ["/* Valor del último salario base de cotización diario en pesos.", "Tu historia laboral", "deInstituto Mexicano del Seguro Social"];
-
+        private const string NAME_FILTER = "NSS:";
         public static string getFileContent(string file)
         {
             PdfReader pdfReader = new PdfReader(file);
@@ -26,6 +26,7 @@ namespace calculadora_de_semanas
                 ITextExtractionStrategy strategy = new SimpleTextExtractionStrategy();
                 data += PdfTextExtractor.GetTextFromPage(pdfDocument.GetPage(page), strategy);
             }
+            Console.WriteLine(data);
             return data;
         }
         public static int getWeeks(string data)
@@ -57,6 +58,59 @@ namespace calculadora_de_semanas
                 }
             }
             return filteredJobs;
+        }
+
+        public static string getCurp(string data)
+        {
+            int startIndex = data.IndexOf(PdfParser.NAME_FILTER) + PdfParser.NAME_FILTER.Length + 1;
+            int endIndex = startIndex;
+            while (endIndex < data.Length && !char.IsDigit(data[endIndex]))
+            {
+                endIndex++;
+            }
+
+            startIndex = endIndex;
+            while (endIndex < data.Length && data[endIndex]!='\n')
+            {
+                endIndex++;
+            }
+
+            startIndex = endIndex+1;
+
+            while (endIndex < data.Length && data[endIndex] != ' ')
+            {
+                endIndex++;
+            }
+
+            return data.Substring(startIndex, endIndex - startIndex);
+        }
+        public static string getNss(string data)
+        {
+            int startIndex = data.IndexOf(PdfParser.NAME_FILTER) + PdfParser.NAME_FILTER.Length + 1;
+            int endIndex = startIndex;
+            while (endIndex < data.Length && !char.IsDigit(data[endIndex]))
+            {
+                endIndex++;
+            }
+
+            startIndex = endIndex;
+            while (endIndex < data.Length && char.IsDigit(data[endIndex]))
+            {
+                endIndex++;
+            }
+
+            return data.Substring(startIndex, endIndex - startIndex);
+        }
+        public static string getNombre(string data)
+        {
+            int startIndex = data.IndexOf(PdfParser.NAME_FILTER) + PdfParser.NAME_FILTER.Length + 1;
+            int endIndex = startIndex;
+
+            while (endIndex < data.Length && data[endIndex]!='\n')
+            {
+                endIndex++;
+            }
+            return data.Substring(startIndex, endIndex - startIndex);
         }
     }
 }

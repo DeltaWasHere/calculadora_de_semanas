@@ -49,16 +49,22 @@ public partial class MainWindow : Window
     {
         string fileContent = PdfParser.getFileContent(filename);
         int semanas = PdfParser.getWeeks(fileContent);
+        string curp = PdfParser.getCurp(fileContent);
+        string nss = PdfParser.getNss(fileContent);
+        string nombre = PdfParser.getNombre(fileContent);
         ArrayList rawJobs = PdfParser.getJobs(fileContent);
 
-        this.person = new Person(semanas, rawJobs);
-        
+        this.person = new Person(semanas, rawJobs, nombre, curp, nss);
+
         jobsToShow.Items.Clear();
         foreach (Job job in person.getJobs())
         {
             jobsToShow.Items.Add(job);
         }
         semanasTotales.Text = "Promedio de salario en las ultimas 250 semanas: " + person.getSalarioPromedioDisplay();
+        curpShow.Text = "Curp: " + person.getCurp();
+        nssShow.Text = "Nss: " + person.getNss();
+        nombreShow.Text = "Nombre: " + person.getNombre();
     }
 
     private void OpenHistory(object sender, RoutedEventArgs e)

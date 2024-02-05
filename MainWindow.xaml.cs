@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using calculadora_de_semanas;
+using Microsoft.Extensions.Logging;
 using Microsoft.Win32;
 
 
@@ -57,9 +58,9 @@ public partial class MainWindow : Window
         this.person = new Person(semanas, rawJobs, nombre, curp, nss);
 
         jobsToShow.Items.Clear();
-        foreach (Job job in person.getJobs())
+        for(int i = 0; i<this.person.LastJobs; i++)
         {
-            jobsToShow.Items.Add(job);
+            jobsToShow.Items.Add(this.person.jobs[i]);
         }
         semanasTotales.Text = "Promedio de salario en las ultimas 250 semanas: " + person.getSalarioPromedioDisplay();
         curpShow.Text = "Curp: " + person.getCurp();

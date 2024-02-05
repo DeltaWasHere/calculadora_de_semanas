@@ -42,7 +42,7 @@ namespace calculadora_de_semanas
                 {
                     entries.Add(new AverageEntry(job.getAlta(), job.getBaja(), job.getPatron(), job.getSalario(), counter+1));
                 }
-                if (cumulativeWeeks >= 250)
+                if (cumulativeWeeks+job.getSemanas() >= 250)
                 {
                     break;
                 }

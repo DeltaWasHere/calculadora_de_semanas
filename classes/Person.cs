@@ -155,7 +155,8 @@ namespace calculadora_de_semanas
                 {
                     cumulativeSalary += job.getSalario();
                 }
-                if (cumulativeWeeks >= 250)
+                this.LastJobs++;
+                if (cumulativeWeeks+job.getSemanas() >= 250)
                 {
                     break;
                 }

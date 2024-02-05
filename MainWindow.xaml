@@ -26,6 +26,9 @@
         </Menu>
 
         <StackPanel x:Name="personInfo" Grid.Column="0" Grid.Row="1">
+            <TextBlock x:Name="nombreShow"/>
+            <TextBlock x:Name="curpShow" />
+            <TextBlock x:Name="nssShow"/>
             <TextBlock x:Name="semanasTotales"/>
             <Button Click="OpenHistory">Ver historial</Button>
         </StackPanel>

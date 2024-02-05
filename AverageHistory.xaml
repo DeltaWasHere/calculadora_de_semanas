@@ -12,7 +12,8 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Numero" Binding="{Binding place}" />
                 <DataGridTextColumn Header="Patron" Binding="{Binding patron}" />
-                <DataGridTextColumn Header="Fecha de alta" Binding="{Binding baja}" />
+                <DataGridTextColumn Header="Fecha de alta" Binding="{Binding alta}" />
+                <DataGridTextColumn Header="Fecha de baja" Binding="{Binding baja}" />
                 <DataGridTextColumn Header="Salario" Binding="{Binding salario}" />
             </DataGrid.Columns>
         </DataGrid>

@@ -145,24 +145,23 @@ namespace calculadora_de_semanas
 
         private void calcularSalarioPromedio()
         {
-            BigDecimal cumulativeWeeks = 0;
+            int cumulativeWeeks = 0;
             BigDecimal cumulativeSalary = 0;
 
-            foreach (Job job in this.jobs)
+            int counter;
+            foreach (Job job in jobs)
             {
-                cumulativeWeeks += job.getSemanas();
-                LastJobs++;
-                if (cumulativeWeeks >= Person.LAST_WEEKS)
+                for (counter = cumulativeWeeks; counter < cumulativeWeeks + job.getSemanas() && counter < 250; counter++)
                 {
-                    BigDecimal semanasGap = cumulativeWeeks - Person.LAST_WEEKS;
-                    cumulativeSalary += (job.getSemanas() - semanasGap) * job.getSalario();
+                    cumulativeSalary += job.getSalario();
+                }
+                if (cumulativeWeeks >= 250)
+                {
                     break;
                 }
-                else
-                {
-                    cumulativeSalary += job.getSemanas() * job.getSalario();
-                }
+                cumulativeWeeks += int.Parse(Regex.Match(job.getSemanas().ToString(), @"^(\d+)").ToString());
             }
+    
             salarioPromedio = cumulativeSalary / Person.LAST_WEEKS;
             this.salarioPromedioDisplay = Regex.Match(salarioPromedio.ToString(), @"\d*\.?\d{0,2}").ToString();
         }

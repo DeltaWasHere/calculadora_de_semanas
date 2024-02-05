@@ -149,9 +149,10 @@ namespace calculadora_de_semanas
             BigDecimal cumulativeSalary = 0;
 
             int counter;
+            //usando semanasDisplay porque viene redondeado
             foreach (Job job in jobs)
             {
-                for (counter = cumulativeWeeks; counter < cumulativeWeeks + job.getSemanas() && counter < 250; counter++)
+                for (counter = cumulativeWeeks; counter < cumulativeWeeks + int.Parse(job.getSemanasDisplay()) && counter < 250; counter++)
                 {
                     cumulativeSalary += job.getSalario();
                 }
@@ -160,7 +161,7 @@ namespace calculadora_de_semanas
                 {
                     break;
                 }
-                cumulativeWeeks += int.Parse(Regex.Match(job.getSemanas().ToString(), @"^(\d+)").ToString());
+                cumulativeWeeks += int.Parse(job.getSemanasDisplay());
             }
     
             salarioPromedio = cumulativeSalary / Person.LAST_WEEKS;

@@ -35,10 +35,11 @@ namespace calculadora_de_semanas
             int lastJobs = person.getLastJobs();
 
             int cumulativeWeeks = 0;
-            int counter;
+            int counter, semanasHolder;
+            //usando semanasDisplay porque viene redondeado
             foreach (Job job in jobs)
             {
-                for (counter = cumulativeWeeks; counter < cumulativeWeeks + job.getSemanas() && counter < 250; counter++)
+                for (counter = cumulativeWeeks; counter < cumulativeWeeks + int.Parse(job.getSemanasDisplay()) && counter < 250; counter++)
                 {
                     entries.Add(new AverageEntry(job.getAlta(), job.getBaja(), job.getPatron(), job.getSalario(), counter+1));
                 }
@@ -46,7 +47,8 @@ namespace calculadora_de_semanas
                 {
                     break;
                 }
-                cumulativeWeeks += int.Parse(Regex.Match(job.getSemanas().ToString(), @"^(\d+)").ToString());
+                
+                cumulativeWeeks += int.Parse(job.getSemanasDisplay());
             }
             entriesToShow.DataContext = entries;
         }

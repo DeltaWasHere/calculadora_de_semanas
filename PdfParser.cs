@@ -26,7 +26,7 @@ namespace calculadora_de_semanas
                 ITextExtractionStrategy strategy = new SimpleTextExtractionStrategy();
                 data += PdfTextExtractor.GetTextFromPage(pdfDocument.GetPage(page), strategy);
             }
-            Console.WriteLine(data);
+           
             return data;
         }
         public static int getWeeks(string data)

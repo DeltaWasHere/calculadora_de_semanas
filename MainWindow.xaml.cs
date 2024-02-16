@@ -79,4 +79,16 @@ public partial class MainWindow : Window
             (new AverageHistory(person)).Show();
         }
     }
+
+    private void CreateProyections_Click(object sender, RoutedEventArgs e)
+    {
+        if (this.person == null)
+        {
+            MessageBox.Show("Porfavor cargue el archivo de las semanas antes de continuar");
+        }
+        else
+        {
+            (new proyectionForm(person)).Show();
+        }
+    }
 }

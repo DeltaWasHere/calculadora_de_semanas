@@ -1,12 +1,5 @@
-using System;
-using System.Collections;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using ExtendedNumerics;
+using System.Text.RegularExpressions;
 
 namespace calculadora_de_semanas
 {
@@ -117,10 +110,12 @@ namespace calculadora_de_semanas
         public void calcularSemanas()
         {
             this.semanas = (BigDecimal)((baja.Equals("Vigente") ? DateTime.Today : DateTime.Parse(baja)) - DateTime.Parse(alta)).TotalDays / 7;
-            if (Regex.Match(semanas.ToString(), @"\d+\.[5-9]").ToString().Length>0)
+            if (Regex.Match(semanas.ToString(), @"\d+\.[5-9]").ToString().Length > 0)
             {
-                this.semanasDisplay=(this.semanas+1).WholeValue.ToString();
-            }else{
+                this.semanasDisplay = (this.semanas + 1).WholeValue.ToString();
+            }
+            else
+            {
                 this.semanasDisplay = this.semanas.WholeValue.ToString();
             }
         }

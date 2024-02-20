@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using ExtendedNumerics;
 
 namespace calculadora_de_semanas
@@ -11,11 +6,11 @@ namespace calculadora_de_semanas
 
     public class AverageEntry
     {
-        public string alta{get;set;}
-        public string baja{get;set;}
-        public string patron{get;set;}
-        public BigDecimal salario{get;set;}
-        public int place{get;set;}
+        public string alta { get; set; }
+        public string baja { get; set; }
+        public string patron { get; set; }
+        public BigDecimal salario { get; set; }
+        public int place { get; set; }
         #region "GEt&Set"
         public string getAlta()
         {

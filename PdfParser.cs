@@ -1,12 +1,7 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using iText.Kernel.Pdf;
 using iText.Kernel.Pdf.Canvas.Parser;
 using iText.Kernel.Pdf.Canvas.Parser.Listener;
-using ExtendedNumerics;
+using System.Collections;
 
 namespace calculadora_de_semanas
 {
@@ -26,7 +21,7 @@ namespace calculadora_de_semanas
                 ITextExtractionStrategy strategy = new SimpleTextExtractionStrategy();
                 data += PdfTextExtractor.GetTextFromPage(pdfDocument.GetPage(page), strategy);
             }
-           
+
             return data;
         }
         public static int getWeeks(string data)
@@ -70,12 +65,12 @@ namespace calculadora_de_semanas
             }
 
             startIndex = endIndex;
-            while (endIndex < data.Length && data[endIndex]!='\n')
+            while (endIndex < data.Length && data[endIndex] != '\n')
             {
                 endIndex++;
             }
 
-            startIndex = endIndex+1;
+            startIndex = endIndex + 1;
 
             while (endIndex < data.Length && data[endIndex] != ' ')
             {
@@ -106,7 +101,7 @@ namespace calculadora_de_semanas
             int startIndex = data.IndexOf(PdfParser.NAME_FILTER) + PdfParser.NAME_FILTER.Length + 1;
             int endIndex = startIndex;
 
-            while (endIndex < data.Length && data[endIndex]!='\n')
+            while (endIndex < data.Length && data[endIndex] != '\n')
             {
                 endIndex++;
             }

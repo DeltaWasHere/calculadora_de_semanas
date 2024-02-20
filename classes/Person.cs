@@ -1,10 +1,6 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using ExtendedNumerics;
+using System.Collections;
+using System.Text.RegularExpressions;
 
 namespace calculadora_de_semanas
 {
@@ -157,13 +153,13 @@ namespace calculadora_de_semanas
                     cumulativeSalary += job.getSalario();
                 }
                 this.LastJobs++;
-                if (cumulativeWeeks+job.getSemanas() >= 250)
+                if (cumulativeWeeks + job.getSemanas() >= 250)
                 {
                     break;
                 }
                 cumulativeWeeks += int.Parse(job.getSemanasDisplay());
             }
-    
+
             salarioPromedio = cumulativeSalary / Person.LAST_WEEKS;
             this.salarioPromedioDisplay = Regex.Match(salarioPromedio.ToString(), @"\d*\.?\d{0,2}").ToString();
         }

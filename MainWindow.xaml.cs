@@ -1,20 +1,6 @@
-﻿using System.Collections;
-using System.Collections.ObjectModel;
-using System.Text;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks.Dataflow;
+﻿using Microsoft.Win32;
+using System.Collections;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using calculadora_de_semanas;
-using Microsoft.Extensions.Logging;
-using Microsoft.Win32;
 
 
 
@@ -58,7 +44,7 @@ public partial class MainWindow : Window
         this.person = new Person(semanas, rawJobs, nombre, curp, nss);
 
         jobsToShow.Items.Clear();
-        for(int i = 0; i<this.person.LastJobs; i++)
+        for (int i = 0; i < this.person.LastJobs; i++)
         {
             jobsToShow.Items.Add(this.person.jobs[i]);
         }

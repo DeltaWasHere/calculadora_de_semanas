@@ -1,23 +1,6 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using calculadora_de_semanas;
-using ExtendedNumerics;
-using Microsoft.Win32;
 
 
 namespace calculadora_de_semanas
@@ -41,13 +24,13 @@ namespace calculadora_de_semanas
             {
                 for (counter = cumulativeWeeks; counter < cumulativeWeeks + int.Parse(job.getSemanasDisplay()) && counter < 250; counter++)
                 {
-                    entries.Add(new AverageEntry(job.getAlta(), job.getBaja(), job.getPatron(), job.getSalario(), counter+1));
+                    entries.Add(new AverageEntry(job.getAlta(), job.getBaja(), job.getPatron(), job.getSalario(), counter + 1));
                 }
-                if (cumulativeWeeks+job.getSemanas() >= 250)
+                if (cumulativeWeeks + job.getSemanas() >= 250)
                 {
                     break;
                 }
-                
+
                 cumulativeWeeks += int.Parse(job.getSemanasDisplay());
             }
             entriesToShow.DataContext = entries;

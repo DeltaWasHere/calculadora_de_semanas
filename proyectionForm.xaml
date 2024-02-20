@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:calculadora_de_semanas"
         mc:Ignorable="d"
-        Title="proyectionForm" Height="200" Width="300">
+        Title="proyectionForm" Height="200" Width="450">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -26,23 +26,27 @@
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         <Label Grid.Column="0" Grid.Row="0" >Proyeccion 1: </Label>
-        <TextBox Grid.Column="1" Grid.Row="0" Margin="8" Name="weeks1" GotFocus="weeks_GotFocus" 
+        <TextBox Grid.Column="1" Grid.Row="0" Margin="8" x:Name="weeks1" GotFocus="weeks_GotFocus" 
                  LostFocus="weeks_LostFocus" Foreground="LightGray" PreviewTextInput="weeks_PreviewTextInput">Semanas</TextBox>
-        <TextBox Grid.Column="2" Grid.Row="0" Background="LightGray" Margin="8" ></TextBox>
+        <ComboBox Grid.Column="2" Grid.Row="0"  Margin="6" x:Name="uma1" SelectedIndex="0">
+            <ComboBoxItem Foreground="LightGray" Visibility="Collapsed">Seleccione las umas</ComboBoxItem>
+        </ComboBox>
         
         <Label Grid.Column="0" Grid.Row="1" >Proyeccion 2:</Label>
-        <TextBox Grid.Column="1" Grid.Row="1" Margin="8" Name="weeks2" 
+        <TextBox Grid.Column="1" Grid.Row="1" Margin="8" x:Name="weeks2" 
                  GotFocus="weeks_GotFocus" LostFocus="weeks_LostFocus" Foreground="LightGray" PreviewTextInput="weeks_PreviewTextInput">Semanas</TextBox>
-        <TextBox Grid.Column="2" Grid.Row="1" Background="LightGray" Margin="8" ></TextBox>
+        <ComboBox Grid.Column="2" Grid.Row="1" Margin="6" x:Name="uma2" SelectedIndex="0">
+            <ComboBoxItem Foreground="LightGray" Visibility="Collapsed">Seleccione las umas</ComboBoxItem>
+        </ComboBox>
         
         <Label Grid.Column="0" Grid.Row="2" >Proyeccion 3:</Label>
-        <TextBox Grid.Column="1" Grid.Row="2" Margin="8" Name="weeks3" GotFocus="weeks_GotFocus" 
+        <TextBox Grid.Column="1" Grid.Row="2" Margin="8" x:Name="weeks3" GotFocus="weeks_GotFocus" 
                  LostFocus="weeks_LostFocus" Foreground="LightGray" PreviewTextInput="weeks_PreviewTextInput">Semanas</TextBox>
-        <ListBox>
-            <ListBoxItem Content=""/>
-        </ListBox>
+        <ComboBox Grid.Column="2" Grid.Row="2" Margin="6" x:Name="uma3" SelectedIndex="0">
+            <ComboBoxItem Foreground="LightGray" Visibility="Collapsed">Seleccione las umas</ComboBoxItem>
+        </ComboBox>
 
-        <Button Grid.Row="3" Grid.Column="1">Crear proyecciones</Button>
+        <Button Grid.Row="3" Grid.Column="1" Name="create_proyection" Click="create_proyection_Click">Crear proyecciones</Button>
     </Grid>
     
 </Window>

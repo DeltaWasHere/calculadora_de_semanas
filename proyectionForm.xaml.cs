@@ -9,10 +9,13 @@ using System.Windows.Media;
 namespace calculadora_de_semanas
 {
     public partial class proyectionForm : Window
+
     {
+        Person person;
         public proyectionForm(Person person)
         {
             InitializeComponent();
+            this.person = person;
             BigDecimal UMA = 108.57;
             for (int i = 1; i < 14; i++)
             {
@@ -59,14 +62,14 @@ namespace calculadora_de_semanas
                 return;
             }
             ArrayList proyections = new ArrayList(); 
-            proyections.Add(new Proyection(int.Parse(weeks1.Text), BigDecimal.Parse(uma1.SelectedValue.ToString())));
+            proyections.Add(new Proyection(person,int.Parse(weeks1.Text), BigDecimal.Parse(uma1.SelectedValue.ToString())));
             if (!weeks2.Text.Equals("") && uma2.SelectedIndex != 0) {
-                proyections.Add(new Proyection(int.Parse(weeks2.Text), BigDecimal.Parse(uma2.SelectedValue.ToString())));
+                proyections.Add(new Proyection(person,int.Parse(weeks2.Text), BigDecimal.Parse(uma2.SelectedValue.ToString())));
 
             }
             if (!weeks3.Text.Equals("") && uma3.SelectedIndex != 0)
             {
-                proyections.Add(new Proyection(int.Parse(weeks3.Text), BigDecimal.Parse(uma3.SelectedValue.ToString())));
+                proyections.Add(new Proyection(person,int.Parse(weeks3.Text), BigDecimal.Parse(uma3.SelectedValue.ToString())));
 
             }
             new proyections(proyections);

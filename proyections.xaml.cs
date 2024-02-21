@@ -12,6 +12,10 @@ namespace calculadora_de_semanas
         {
             InitializeComponent();
             //todo for each proyection genera un frame de proyectionData
+            foreach (var item in proyectionList)
+            {
+                
+            }
         }
     }
 }

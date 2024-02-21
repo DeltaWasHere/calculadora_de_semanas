@@ -7,6 +7,25 @@
         mc:Ignorable="d"
         Title="proyections" Height="450" Width="800">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Row="0" Grid.Column="0" x:Name="proyectionPanel1" Orientation="Vertical">
+            <TextBlock x:Name="umaSalaryProyection1">Salario UMA: </TextBlock>
+            <TextBlock x:Name="weeksProjection1">Semanas: </TextBlock>
+        </StackPanel>
         
+        <StackPanel Grid.Row="0" Grid.Column="1" x:Name="proyectionPanel2">
+
+        </StackPanel>
+
+        <StackPanel Grid.Row="0" Grid.Column="2" x:Name="ProyectionPanel3">
+
+        </StackPanel>
     </Grid>
 </Window>

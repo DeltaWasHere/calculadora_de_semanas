@@ -13,6 +13,8 @@ namespace calculadora_de_semanas
         public int LastJobs { get; set; }
         public string salarioPromedioDisplay { get; set; }
         public string curp;
+        public BigDecimal age;
+        public DateTime birthday;
         public string nss;
         public string nombre;
         private const int LAST_WEEKS = 250;
@@ -27,6 +29,7 @@ namespace calculadora_de_semanas
             this.nss = nss;
             parseJobs();
             calcularSalarioPromedio();
+            calcAge();
         }
         #region "Getter&Setter"
         public string getCurp()
@@ -120,6 +123,17 @@ namespace calculadora_de_semanas
 
         #endregion
 
+
+        private void calcAge() {
+            int aux = DateTime.Today.Year;
+            string birthYear="19"+curp.Substring(4, 6);
+            string birthMonth = curp.Substring(6, 8);
+            string birthDayDay =  curp.Substring(8, 10);
+
+            this.birthday = DateTime.Parse($"{birthDayDay}/{birthMonth}/{birthYear}");
+            this.age = (DateTime.Today - this.birthday).TotalDays/365;
+
+        }
         private void parseJobs()
         {
             foreach (string job in rawJobs)

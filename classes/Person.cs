@@ -126,9 +126,9 @@ namespace calculadora_de_semanas
 
         private void calcAge() {
             int aux = DateTime.Today.Year;
-            string birthYear="19"+curp.Substring(4, 6);
-            string birthMonth = curp.Substring(6, 8);
-            string birthDayDay =  curp.Substring(8, 10);
+            string birthYear="19"+curp.Substring(4, 2);
+            string birthMonth = curp.Substring(6, 2);
+            string birthDayDay =  curp.Substring(8, 2);
 
             this.birthday = DateTime.Parse($"{birthDayDay}/{birthMonth}/{birthYear}");
             this.age = (DateTime.Today - this.birthday).TotalDays/365;

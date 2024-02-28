@@ -17,7 +17,7 @@ namespace calculadora_de_semanas
         private const int YEAR_DAYS = 365;
         private const int MONTHS = 12;
         private int remainingWeeksTillSixties;
-        private Person person;
+        public Person person { get; }
         private BigDecimal BASIC_CUANTIC_PERCENT= 0.13;
         private BigDecimal ANUAL_INCREMENT_FIRST_PERCENT = 0.245;
         private BigDecimal ANUAL_INCREMENT_SECOND_PERCENT = 0.11;
@@ -26,6 +26,13 @@ namespace calculadora_de_semanas
          
             this.week = week;
             this.uma=uma;
+            this.person = person;
+            calcRemainingWeeksTillSixties();
+            calcTotalPension();
+            
+        }
+
+        public void calcRemainingWeeksTillSixties() {
             if (person.age < 60)
             {
                 BigDecimal aux = ((60 - person.age) * 365 / 7);
@@ -38,18 +45,32 @@ namespace calculadora_de_semanas
                     this.remainingWeeksTillSixties = int.Parse(aux.WholeValue.ToString());
                 }
             }
-            else {
+            else
+            {
                 this.remainingWeeksTillSixties = 0;
             }
-
         }
 
         public void calcTotalPension() {
-            BigDecimal anualSalary = int.Parse(this.person.getSalarioPromedioDisplay()) * YEAR_DAYS;
+            bool substract = false;
+            BigDecimal anualSalary = BigDecimal.Parse(this.person.getSalarioPromedioDisplay()) * YEAR_DAYS;
 
             BigDecimal basicCuanticPercent = (this.person.getSemanasTotales()-500) / 52 / 100;
-            BigDecimal basicCuantia = (anualSalary * BASIC_CUANTIC_PERCENT)+
-                (anualSalary * BASIC_CUANTIC_PERCENT*basicCuanticPercent);
+
+            if (basicCuanticPercent.IsNegative()) { 
+                substract= true;
+                basicCuanticPercent = ( 500- this.person.getSemanasTotales()) / 52 / 100;
+            }
+            BigDecimal basicCuantia;
+            if (substract)
+            {
+                basicCuantia=(anualSalary * BASIC_CUANTIC_PERCENT) -
+                    (anualSalary * BASIC_CUANTIC_PERCENT * basicCuanticPercent);
+            }
+            else {
+                basicCuantia=(anualSalary * BASIC_CUANTIC_PERCENT) +
+                   (anualSalary * BASIC_CUANTIC_PERCENT * basicCuanticPercent);
+            }
 
             BigDecimal anualIncrement = (anualSalary * ANUAL_INCREMENT_FIRST_PERCENT) * 
                 ((this.person.getSemanasTotales() + remainingWeeksTillSixties - 500) / 52);
@@ -58,7 +79,8 @@ namespace calculadora_de_semanas
 
             this.pension = ((basicCuantia+anualIncrement)+
                 ((basicCuantia + anualIncrement)*FAMILIAL_ASSIGNATIONS_PERCENT))/12;
-            
+
+
             
         }
 

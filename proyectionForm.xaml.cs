@@ -61,7 +61,8 @@ namespace calculadora_de_semanas
                 MessageBox.Show("Porfavor rellene al menos una proyeccion");
                 return;
             }
-            ArrayList proyections = new ArrayList(); 
+            List<Proyection> proyections = new List<Proyection>();
+            proyections.Add(new Proyection(person, 0,0));
             proyections.Add(new Proyection(person,int.Parse(weeks1.Text), BigDecimal.Parse(uma1.SelectedValue.ToString())));
             if (!weeks2.Text.Equals("") && uma2.SelectedIndex != 0) {
                 proyections.Add(new Proyection(person,int.Parse(weeks2.Text), BigDecimal.Parse(uma2.SelectedValue.ToString())));
@@ -72,7 +73,7 @@ namespace calculadora_de_semanas
                 proyections.Add(new Proyection(person,int.Parse(weeks3.Text), BigDecimal.Parse(uma3.SelectedValue.ToString())));
 
             }
-            new proyections(proyections);
+            (new proyections(proyections)).Show();
         }
     }
 }

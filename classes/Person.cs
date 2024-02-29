@@ -140,16 +140,26 @@ namespace calculadora_de_semanas
             {
                 //TODO usar reguex en lugar de numeros magicos
                 string[] split = job.Split('\n');
-                //ejemplo de array spliteado:
-                //0 4/05/1993
-                //1 JALISCO
-                //2 Salario Base de Cotización */ Fecha de alta Fecha de baja 16/07/1992
-                //3 Entidad federativa
-                //4 $ 39.99
-                //5 Nombre del patrón NOMBRE DEL PATRON.
-                //6 Registro Patronal fdfbfwe7184 (18)
-                jobs.Add(new Job(split[5].Substring(18), split[6].Substring(18), split[1], BigDecimal.Parse(split[4].Substring(1)), split[2].Substring(57), split[0]));
+                //define index of baja
+                 string baja = job.Contains("Vigene")?"Vigente":Regex.Match(job, @"/(\d{1,2}\/\d{2}\/\d{4})/").Value;
+                string alta = Regex.Matches(job, @"/(\d{ 1,2}\/\d{ 2}\/\d{ 4})/g")[1].Value;
+                string entidad = Regex.Match(job, @"/[A-Z]{2,}/").Value;
+                string patron = Regex.Match(job, @"/\b[A-Z]+(?:\s[A-Z]+)+\b/").Value;
+                string registro = Regex.Match(job, @"/\w?\d{5,}/").Value;
+                BigDecimal finalSalary = BigDecimal.Parse(Regex.Match(job, @"/\d*\.\d*/").Value);
 
+                if (job.Contains("MODIFICACION DE SALARIO")){
+                    string auxAlta= alta;
+                    string auxBaja;
+                    do
+                    {
+                        auxBaja = Regex.Match(job, @"").Value;
+                        jobs.Add(new Job(patron, registro, entidad, finalSalary, alta, baja));
+                    } while (!job.Equals(job.Replace("MODIFICACION DE SALARIO", "")));
+                }
+                else {
+                    jobs.Add(new Job(patron, registro, entidad, finalSalary, alta, baja));
+                }
             }
         }
 

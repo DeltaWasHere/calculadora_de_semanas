@@ -8,7 +8,7 @@ namespace calculadora_de_semanas
     public class PdfParser
     {
         private const string WEEKS_FILTER = "Constancia de Semanas Cotizadas en el IMSS";
-        private static readonly string[] JOB_SEPARATORS = ["/* Valor del último salario base de cotización diario en pesos.", "Tu historia laboral", "deInstituto Mexicano del Seguro Social"];
+        private static readonly string[] JOB_SEPARATORS = ["/* Valor del último salario base de cotización diario en pesos.", "Tu historia laboral"];
         private const string NAME_FILTER = "NSS:";
         public static string getFileContent(string file)
         {

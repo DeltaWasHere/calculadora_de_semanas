@@ -55,7 +55,9 @@ namespace calculadora_de_semanas
             bool substract = false;
             BigDecimal anualSalary = BigDecimal.Parse(this.person.getSalarioPromedioDisplay()) * YEAR_DAYS;
 
-            BigDecimal basicCuanticPercent = (this.person.getSemanasTotales()-500) / 52 / 100;
+            BigDecimal basicCuanticPercent = (this.person.semanasTotales - 500);
+            basicCuanticPercent = ((basicCuanticPercent) / 52) / 100;
+            basicCuanticPercent = BigDecimal.Round(basicCuanticPercent, 9);
 
             if (basicCuanticPercent.IsNegative()) { 
                 substract= true;
@@ -68,20 +70,17 @@ namespace calculadora_de_semanas
                     (anualSalary * BASIC_CUANTIC_PERCENT * basicCuanticPercent);
             }
             else {
-                basicCuantia=(anualSalary * BASIC_CUANTIC_PERCENT) +
-                   (anualSalary * BASIC_CUANTIC_PERCENT * basicCuanticPercent);
+                BigDecimal aux = (anualSalary * BASIC_CUANTIC_PERCENT * basicCuanticPercent);
+                basicCuantia =(anualSalary * BASIC_CUANTIC_PERCENT) +aux;
+                   ;
             }
 
             BigDecimal anualIncrement = (anualSalary * ANUAL_INCREMENT_FIRST_PERCENT) * 
                 ((this.person.getSemanasTotales() + remainingWeeksTillSixties - 500) / 52);
             anualIncrement = anualIncrement + (anualIncrement * ANUAL_INCREMENT_SECOND_PERCENT);
 
-
-            this.pension = ((basicCuantia+anualIncrement)+
+             this.pension = ((basicCuantia+anualIncrement)+
                 ((basicCuantia + anualIncrement)*FAMILIAL_ASSIGNATIONS_PERCENT))/12;
-
-
-            
         }
 
     }

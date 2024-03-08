@@ -167,7 +167,7 @@ namespace calculadora_de_semanas
             }
         }
 
-        private void calcularSalarioPromedio()
+        public void calcularSalarioPromedio()
         {
             int cumulativeWeeks = 0;
             BigDecimal cumulativeSalary = 0;

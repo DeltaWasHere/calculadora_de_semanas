@@ -31,6 +31,7 @@ namespace calculadora_de_semanas
             this.salario = salario;
             this.semanas = weeks;
             this.semanasDisplay = weeks.ToString();
+       
         }
         #region  "Getter&Setter"
         public string getSemanasDisplay()

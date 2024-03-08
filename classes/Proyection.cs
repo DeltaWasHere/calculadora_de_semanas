@@ -34,9 +34,10 @@ namespace calculadora_de_semanas
         }
 
         public void calcRemainingWeeksTillSixties() {
-            BigDecimal aux;
             if (this.person.age < 60) {
-                this.remainingWeeksTillSixties = ((60 - this.person.age) * 365 / 7)*(1);
+                DateTime aux = this.person.birthday;
+                aux =aux.AddYears(60);
+                this.remainingWeeksTillSixties = (DateTime.Today-aux).TotalDays/7*(-1);
             } else{
                 remainingWeeksTillSixties = 0;
             }
@@ -73,8 +74,9 @@ namespace calculadora_de_semanas
                     ((this.person.semanasTotales + remainingWeeksTillSixties - 500) / 52);
                 anualIncrement = anualIncrement + (anualIncrement * ANUAL_INCREMENT_SECOND_PERCENT);
 
-                this.pension = ((basicCuantia + anualIncrement) +
-                ((basicCuantia + anualIncrement) * FAMILIAL_ASSIGNATIONS_PERCENT)) / 12;
+                this.pension = BigDecimal.Round(((basicCuantia + anualIncrement) +
+                ((basicCuantia + anualIncrement) * FAMILIAL_ASSIGNATIONS_PERCENT)) / 12, 4);
+                
             }
             else {
                 this.pension = 0;

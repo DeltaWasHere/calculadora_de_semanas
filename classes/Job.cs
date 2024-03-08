@@ -25,6 +25,13 @@ namespace calculadora_de_semanas
             this.baja = baja;
             calcularSemanas();
         }
+        //constructor for proyections
+        public Job(BigDecimal salario, int weeks  )
+        {
+            this.salario = salario;
+            this.semanas = weeks;
+            this.semanasDisplay = weeks.ToString();
+        }
         #region  "Getter&Setter"
         public string getSemanasDisplay()
         {

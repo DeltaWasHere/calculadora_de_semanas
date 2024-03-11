@@ -3,17 +3,13 @@ using System.Windows;
 
 namespace calculadora_de_semanas
 {
-    /// <summary>
-    /// Lógica de interacción para proyections.xaml
-    /// </summary>
     public partial class proyections : Window
     {
         public proyections(List<Proyection> proyectionList)
         {
             
             InitializeComponent();
-            //todo for each proyection genera un frame de proyectionData
-            DataContext = itemsToShow;
+            this.DataContext = itemsToShow;
             foreach (var item in proyectionList)
             {
                 if (item.week!=0) {
@@ -22,7 +18,7 @@ namespace calculadora_de_semanas
                     item.calcTotalPension();
                 }
                 itemsToShow.Items.Add(item);
-
+               
             }
         }
     }

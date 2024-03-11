@@ -73,6 +73,7 @@ namespace calculadora_de_semanas
 
             }
             (new proyections(proyections)).Show();
+            this.Close();
         }
     }
 }

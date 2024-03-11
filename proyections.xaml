@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:calculadora_de_semanas"
         mc:Ignorable="d"
         Title="proyections" Height="450" Width="800">
-    <StackPanel>
+    <StackPanel Orientation="Horizontal">
         <ItemsControl x:Name="itemsToShow">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>

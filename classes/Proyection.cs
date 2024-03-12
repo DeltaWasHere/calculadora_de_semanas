@@ -17,7 +17,9 @@ namespace calculadora_de_semanas
       
         private const int YEAR_DAYS = 365;
         private const int MONTHS = 12;
+        public BigDecimal averageSalary { get;set; }    
         private BigDecimal remainingWeeksTillSixties;
+        private int totalWeeks;
         public Person person { get; }
         private BigDecimal BASIC_CUANTIC_PERCENT= 0.13;
         private BigDecimal ANUAL_INCREMENT_FIRST_PERCENT = 0.0245;
@@ -27,7 +29,10 @@ namespace calculadora_de_semanas
          
             this.week = week;
             this.uma=uma;
+            this.totalWeeks = person.semanasTotales;
+            this.averageSalary = BigDecimal.Parse(person.salarioPromedioDisplay);
             this.person = person;
+          
             calcRemainingWeeksTillSixties();
             calcTotalPension();
             
@@ -46,17 +51,29 @@ namespace calculadora_de_semanas
         public void calcTotalPension() {
             if (this.person.age < 60)
             {
-                bool substract = false;
-                BigDecimal anualSalary = BigDecimal.Parse(this.person.getSalarioPromedioDisplay()) * YEAR_DAYS;
+                if (week!=0 && uma!=0) {
+                    this.person.jobs.Insert(0, new Job(uma, week));
+                    this.person.semanasTotales += week;
+                    this.person.calcularSalarioPromedio();
 
-                BigDecimal basicCuanticPercent = (this.person.semanasTotales - 500);
+                    this.averageSalary = BigDecimal.Parse(person.salarioPromedioDisplay);
+                    this.totalWeeks = this.person.semanasTotales;
+
+                    this.person.jobs.RemoveAt(0);
+                    this.person.semanasTotales -= week;
+                    this.person.calcularSalarioPromedio();
+                }
+                bool substract = false;
+                BigDecimal anualSalary = averageSalary * YEAR_DAYS;
+
+                BigDecimal basicCuanticPercent = (this.totalWeeks - 500);
                 basicCuanticPercent = ((basicCuanticPercent) / 52) / 100;
                 basicCuanticPercent = BigDecimal.Round(basicCuanticPercent, 9);
 
                 if (basicCuanticPercent.IsNegative())
                 {
                     substract = true;
-                    basicCuanticPercent = (500 - this.person.getSemanasTotales()) / 52 / 100;
+                    basicCuanticPercent = (500 - this.totalWeeks) / 52 / 100;
                 }
                 BigDecimal basicCuantia;
                 if (substract)

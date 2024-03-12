@@ -11,7 +11,7 @@
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
-                        <TextBlock Text="{Binding person.salarioPromedioDisplay, StringFormat= Salario promedio: {0}}" />
+                        <TextBlock Text="{Binding averageSalary, StringFormat= Salario promedio: {0}}" />
                         <TextBlock Text="{Binding pension, StringFormat=Pension: {0}}"/>
                     </StackPanel>
 

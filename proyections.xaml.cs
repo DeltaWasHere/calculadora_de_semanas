@@ -12,13 +12,16 @@ namespace calculadora_de_semanas
             this.DataContext = itemsToShow;
             foreach (var item in proyectionList)
             {
-                if (item.week!=0) {
-                    item.person.jobs.Insert(0, new Job(item.uma, item.week));
-                    item.person.calcularSalarioPromedio();
+                if (item.week != 0)
+                {
                     item.calcTotalPension();
+                    itemsToShow.Items.Add(item);
                 }
-                itemsToShow.Items.Add(item);
-               
+                else {
+                    itemsToShow.Items.Add(item);
+                }
+
+                
             }
         }
     }

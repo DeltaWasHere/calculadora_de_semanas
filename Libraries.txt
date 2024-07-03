@@ -1,0 +1,3 @@
+Libraries used:
+-ExtendedNumerics.BigDecimal https://github.com/AdamWhiteHat/BigDecimal
+-PdfPig https://github.com/UglyToad/PdfPig

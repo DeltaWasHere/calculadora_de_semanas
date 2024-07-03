@@ -14,7 +14,8 @@
 
   <ItemGroup>
     <PackageReference Include="ExtendedNumerics.BigDecimal" Version="2023.1000.3.328" />
-    <PackageReference Include="itext" Version="8.0.2" />
+    <PackageReference Include="Microsoft.Data.Sqlite" Version="8.0.4" />
+    <PackageReference Include="PdfPig" Version="0.1.8" />
   </ItemGroup>
 
 </Project>

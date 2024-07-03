@@ -1,0 +1,22 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style TargetType="TextBox" x:Key="weeksHints">
+        <Style.Triggers>
+            
+            <Trigger Property="Text" Value="{x:Null}">
+                <Setter Property="Text" Value="Semanas"/>
+                <Setter Property="Foreground" Value="Gray"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <Style TargetType="TextBox" x:Key="salaryHints">
+        <Style.Triggers>
+            <Trigger Property="IsFocused" Value="True">
+                <Setter Property="Text" Value=""/>
+            </Trigger>
+            <Trigger Property="IsFocused" Value="False">
+                <Setter Property="Text" Value="Salario"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+</ResourceDictionary>

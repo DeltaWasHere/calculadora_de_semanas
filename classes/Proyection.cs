@@ -14,12 +14,13 @@ namespace calculadora_de_semanas
         public  int week { get; set; }
         public BigDecimal uma { get; set; }
         public BigDecimal pension { get; set; }
-      
         private const int YEAR_DAYS = 365;
         private const int MONTHS = 12;
         public BigDecimal averageSalary { get;set; }    
         private BigDecimal remainingWeeksTillSixties;
         private int totalWeeks;
+        public BigDecimal anualIncrement { get; set; }
+        public BigDecimal basicCuantia { get; set; }
         public Person person { get; }
         private BigDecimal BASIC_CUANTIC_PERCENT= 0.13;
         private BigDecimal ANUAL_INCREMENT_FIRST_PERCENT = 0.0245;
@@ -75,24 +76,24 @@ namespace calculadora_de_semanas
                     substract = true;
                     basicCuanticPercent = (500 - this.totalWeeks) / 52 / 100;
                 }
-                BigDecimal basicCuantia;
+ 
                 if (substract)
                 {
-                    basicCuantia = (anualSalary * BASIC_CUANTIC_PERCENT) -
+                    this.basicCuantia = (anualSalary * BASIC_CUANTIC_PERCENT) -
                         (anualSalary * BASIC_CUANTIC_PERCENT * basicCuanticPercent);
                 }
                 else
                 {
                     BigDecimal aux = (anualSalary * BASIC_CUANTIC_PERCENT * basicCuanticPercent);
-                    basicCuantia = (anualSalary * BASIC_CUANTIC_PERCENT) + aux;
+                    this.basicCuantia = (anualSalary * BASIC_CUANTIC_PERCENT) + aux;
                 }
 
-                BigDecimal anualIncrement = (anualSalary * ANUAL_INCREMENT_FIRST_PERCENT) *
+                this.anualIncrement = (anualSalary * ANUAL_INCREMENT_FIRST_PERCENT) *
                     ((this.person.semanasTotales + remainingWeeksTillSixties - 500) / 52);
-                anualIncrement = anualIncrement + (anualIncrement * ANUAL_INCREMENT_SECOND_PERCENT);
+                this.anualIncrement = this.anualIncrement + (this.anualIncrement * ANUAL_INCREMENT_SECOND_PERCENT);
 
-                this.pension = BigDecimal.Round(((basicCuantia + anualIncrement) +
-                ((basicCuantia + anualIncrement) * FAMILIAL_ASSIGNATIONS_PERCENT)) / 12, 4);
+                this.pension = BigDecimal.Round(((this.basicCuantia + this.anualIncrement) +
+                ((basicCuantia + this.anualIncrement) * FAMILIAL_ASSIGNATIONS_PERCENT)) / 12, 4);
                 
             }
             else {

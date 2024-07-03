@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using calculadora_de_semanas.views;
+using Microsoft.Win32;
 using System.Collections;
 using System.Windows;
 
@@ -35,13 +36,11 @@ public partial class MainWindow : Window
     private void loadFile(string filename)
     {
         string fileContent = PdfParser.getFileContent(filename);
-        int semanas = PdfParser.getWeeks(fileContent);
-        string curp = PdfParser.getCurp(fileContent);
-        string nss = PdfParser.getNss(fileContent);
-        string nombre = PdfParser.getNombre(fileContent);
-        ArrayList rawJobs = PdfParser.getJobs(fileContent);
 
-        this.person = new Person(semanas, rawJobs, nombre, curp, nss);
+        LoadingWindow loadingWindow = new LoadingWindow(fileContent);
+        if (loadingWindow.ShowDialog()==true) {
+            this.person = loadingWindow.person;
+        }
 
         jobsToShow.Items.Clear();
         for (int i = 0; i < this.person.LastJobs; i++)
@@ -52,6 +51,7 @@ public partial class MainWindow : Window
         curpShow.Text = "Curp: " + person.getCurp();
         nssShow.Text = "Nss: " + person.getNss();
         nombreShow.Text = "Nombre: " + person.getNombre();
+        startPannel.Visibility = Visibility.Hidden;
     }
 
     private void OpenHistory(object sender, RoutedEventArgs e)

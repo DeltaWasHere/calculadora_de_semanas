@@ -1,7 +1,6 @@
-using iText.Kernel.Pdf;
-using iText.Kernel.Pdf.Canvas.Parser;
-using iText.Kernel.Pdf.Canvas.Parser.Listener;
 using System.Collections;
+using UglyToad.PdfPig;
+using UglyToad.PdfPig.Content;
 
 namespace calculadora_de_semanas
 {
@@ -12,21 +11,19 @@ namespace calculadora_de_semanas
         private const string NAME_FILTER = "NSS:";
         public static string getFileContent(string file)
         {
-            PdfReader pdfReader = new PdfReader(file);
-            PdfDocument pdfDocument = new PdfDocument(pdfReader);
+            PdfDocument pdfDocument =  PdfDocument.Open(file);
 
             string data = "";
-            for (int page = 1; page <= pdfDocument.GetNumberOfPages(); page++)
+            foreach (Page page in pdfDocument.GetPages())
             {
-                ITextExtractionStrategy strategy = new SimpleTextExtractionStrategy();
-                data += PdfTextExtractor.GetTextFromPage(pdfDocument.GetPage(page), strategy);
+                data += page.Text;
             }
 
             return data;
         }
         public static int getWeeks(string data)
         {
-            int weeksIndexStart = data.IndexOf(PdfParser.WEEKS_FILTER) + PdfParser.WEEKS_FILTER.Length + 1;
+            int weeksIndexStart = data.IndexOf(PdfParser.WEEKS_FILTER) + PdfParser.WEEKS_FILTER.Length;
             int endIndex = weeksIndexStart;
 
             while (endIndex < data.Length && char.IsDigit(data[endIndex]))
@@ -57,27 +54,15 @@ namespace calculadora_de_semanas
 
         public static string getCurp(string data)
         {
-            int startIndex = data.IndexOf(PdfParser.NAME_FILTER) + PdfParser.NAME_FILTER.Length + 1;
-            int endIndex = startIndex;
-            while (endIndex < data.Length && !char.IsDigit(data[endIndex]))
-            {
-                endIndex++;
+            int startIndex = data.IndexOf(PdfParser.NAME_FILTER);
+            while (!char.IsDigit(data[startIndex])) {
+                startIndex++;
             }
-
-            startIndex = endIndex;
-            while (endIndex < data.Length && data[endIndex] != '\n')
-            {
-                endIndex++;
+            startIndex++;
+            while (char.IsDigit(data[startIndex])) {
+                startIndex++;
             }
-
-            startIndex = endIndex + 1;
-
-            while (endIndex < data.Length && data[endIndex] != ' ')
-            {
-                endIndex++;
-            }
-
-            return data.Substring(startIndex, endIndex - startIndex);
+            return (data.Substring(startIndex, 18));
         }
         public static string getNss(string data)
         {
@@ -98,10 +83,10 @@ namespace calculadora_de_semanas
         }
         public static string getNombre(string data)
         {
-            int startIndex = data.IndexOf(PdfParser.NAME_FILTER) + PdfParser.NAME_FILTER.Length + 1;
+            int startIndex = data.IndexOf(PdfParser.NAME_FILTER) + PdfParser.NAME_FILTER.Length;
             int endIndex = startIndex;
 
-            while (endIndex < data.Length && data[endIndex] != '\n')
+            while (endIndex < data.Length && !char.IsDigit(data[endIndex]))
             {
                 endIndex++;
             }

@@ -14,7 +14,7 @@ namespace calculadora_de_semanas
         public AverageHistory(Person person)
         {
             InitializeComponent();
-            ArrayList jobs = person.getJobs();
+            ArrayList jobs = person.jobs;
             int lastJobs = person.getLastJobs();
 
             int cumulativeWeeks = 0;

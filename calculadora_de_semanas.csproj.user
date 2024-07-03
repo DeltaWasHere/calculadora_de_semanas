@@ -2,21 +2,45 @@
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup />
   <ItemGroup>
-    <Compile Update="proyectionForm.xaml.cs">
+    <Compile Update="views\LoadingWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="proyections.xaml.cs">
+    <Compile Update="views\proyectionForm.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="views\proyections.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="views\UpdateChecker.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="proyectionForm.xaml">
+    <Page Update="views\LoadingWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="proyections.xaml">
+    <Page Update="views\proyectionForm.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="views\proyections.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="styles.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="styles\JobItemStyle.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="styles\ProyectionFormStyles.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="styles\MainWindowStyles.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="styles\ProyectionsStyles.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="views\UpdateChecker.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

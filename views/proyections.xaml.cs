@@ -8,7 +8,7 @@ namespace calculadora_de_semanas
         public proyections(List<Proyection> proyectionList)
         {
             
-            InitializeComponent();
+            InitializeComponent(); //diccionario de datos no encontrado
             this.DataContext = itemsToShow;
             foreach (var item in proyectionList)
             {
@@ -17,11 +17,10 @@ namespace calculadora_de_semanas
                     item.calcTotalPension();
                     itemsToShow.Items.Add(item);
                 }
-                else {
+                else
+                {
                     itemsToShow.Items.Add(item);
                 }
-
-                
             }
         }
     }
